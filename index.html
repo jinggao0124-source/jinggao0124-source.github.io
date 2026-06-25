@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jing Gao</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #eef1f4;
+    --ink-soft: #aab4bd;
+    --ink-faint: #6b7680;
+    --paper: #14181f;
+    --paper-deep: #1b212a;
+    --line: #2b3340;
+    --accent: #e6ad5c;
+    --accent-soft: #2a2820;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+  /* HERO */
+  header { padding: 92px 0 64px; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 22px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(40px, 8vw, 66px);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    margin-bottom: 26px;
+  }
+  .lede {
+    font-size: clamp(18px, 2.6vw, 21px);
+    color: var(--ink-soft);
+    max-width: 60ch;
+  }
+  .lede strong { color: var(--ink); font-weight: 600; }
+  .contact-row {
+    margin-top: 34px; display: flex; flex-wrap: wrap; gap: 8px 22px;
+    font-family: 'JetBrains Mono', monospace; font-size: 13.5px;
+  }
+  .contact-row a {
+    color: var(--ink-soft); text-decoration: none;
+    border-bottom: 1px solid var(--line); padding-bottom: 2px;
+    transition: color .15s, border-color .15s;
+  }
+  .contact-row a:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* SECTION */
+  section { padding: 30px 0; }
+  .sec-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-bottom: 14px; margin-bottom: 30px;
+    border-bottom: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .sec-label span:last-child { color: var(--line); }
+
+  /* ABOUT */
+  .about p { font-size: 17.5px; color: var(--ink-soft); margin-bottom: 18px; max-width: 64ch; }
+  .about p strong { color: var(--ink); font-weight: 600; }
+  .pull {
+    font-family: 'Fraunces', serif; font-weight: 400; font-style: italic;
+    font-size: clamp(21px, 3.4vw, 27px); line-height: 1.34;
+    color: var(--ink); margin: 8px 0 6px; max-width: 24ch;
+  }
+
+  /* PROJECTS */
+  .proj { padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .proj:first-of-type { padding-top: 0; }
+  .proj-top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .proj h3 {
+    font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+  .proj-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-soft);
+    border: 1px solid #3a3526;
+    padding: 4px 10px; border-radius: 2px; white-space: nowrap;
+  }
+  .proj p { color: var(--ink-soft); font-size: 16px; margin-top: 12px; max-width: 64ch; }
+  .proj .meta {
+    font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+    color: var(--ink-faint); margin-top: 12px;
+  }
+  .proj .meta a { color: var(--accent); text-decoration: none; border-bottom: 1px solid #3a3526; }
+  .proj .meta a:hover { border-color: var(--accent); }
+
+  /* EXPERIENCE */
+  .role { display: grid; grid-template-columns: 130px 1fr; gap: 4px 26px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .role:last-child { border-bottom: none; }
+  .role .when { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--ink-faint); padding-top: 4px; }
+  .role .what h4 { font-size: 16.5px; font-weight: 600; }
+  .role .what .org { color: var(--accent); font-weight: 500; }
+  .role .what p { color: var(--ink-soft); font-size: 15px; margin-top: 4px; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; gap: 20px; }
+  .skill-block .k { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 7px; }
+  .skill-block .v { color: var(--ink-soft); font-size: 15.5px; }
+
+  footer { padding: 56px 0 80px; border-top: 1px solid var(--line); margin-top: 30px; }
+  footer .sig { font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; color: var(--ink-soft); }
+  footer .links { margin-top: 16px; display: flex; gap: 20px; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+  footer .links a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+  footer .links a:hover { color: var(--accent); border-color: var(--accent); }
+
+  @media (max-width: 560px) {
+    header { padding: 64px 0 48px; }
+    .role { grid-template-columns: 1fr; gap: 2px; }
+    .role .when { padding-top: 0; margin-bottom: 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">London · EN / 中文 / 日本語 N1</div>
+    <h1>Jing Gao</h1>
+    <p class="lede">Six years in deal and financial-services advisory, now working hands-on at the edge of AI: how models reason, where they break, and whether a mind that doesn't think like ours can still reliably solve our problems.</p>
+    <div class="contact-row">
+      <a href="mailto:jgao01234@gmail.com">jgao01234@gmail.com</a>
+      <a href="https://linkedin.com/in/jinggao24" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/jgao012345" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </header>
+
+  <section class="about">
+    <div class="sec-label"><span>About</span><span>01</span></div>
+    <p>I sit between two worlds that don't usually meet: the structured, risk-careful world of M&amp;A and value-creation advisory, and the open, uncertain work of building with AI. I spent six years in the first, and over the past year I've gone deep into the second on my own initiative.</p>
+    <p>My genuine interest is in <strong>how large models actually work and where they fail</strong> — not the demos, but the reasoning underneath. I keep a personal research base of 400+ papers and care most about reliability and interpretability: the question of how a non-human intelligence can be trusted on real, high-stakes human problems.</p>
+    <p class="pull">Most curious about where models break, and why.</p>
+  </section>
+
+  <section>
+    <div class="sec-label"><span>Selected Work</span><span>02</span></div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <h3>AI Reliability in Financial Benchmarking</h3>
+        <span class="proj-tag">Validation · prototype</span>
+      </div>
+      <p>Before building an AI benchmarking workflow, I tested its riskiest step: whether a model could reliably identify the right peer companies. I ran a controlled experiment against trusted ground-truth sets across several sectors, scored agreement across 16 runs, and diagnosed that the worst failure was a criteria-definition mismatch rather than a capability gap. Writing the criteria into the prompt lifted agreement on the hardest case from near-zero to ~68%. I turned the finding into a hybrid architecture (deterministic screen, model selects and explains within it, human sign-off, deterministic Python for the financials) and built the prototype for the deterministic core.</p>
+      <div class="meta">Designed, ran, and presented to CTO · sponsored to build · code coming to GitHub</div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <h3>Audio Interpretability: Can a Model Hear a Wrong Note?</h3>
+        <span class="proj-tag">In progress</span>
+      </div>
+      <p>An interpretability project that started from playing the piano. I record two versions of a piece, one clean and one with a deliberate wrong note, and probe where inside an open audio model the two representations diverge — letting the layer-by-layer evidence, not a guess, locate where the model registers the error. A small study of whether, and where, a non-human system perceives a human mistake.</p>
+      <div class="meta">Learning mechanistic interpretability (forward hooks, probing, TransformerLens) to build it</div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <h3>AI Workflow Architecture for an Advisory Firm</h3>
+        <span class="proj-tag">Design · adopted</span>
+      </div>
+      <p>On my own initiative, I built a mental model of how AI should work at the firm — not task-level tools, but governed, workflow-level systems — including the distinction between agentic and AI-augmented workflows, where human checkpoints belong, and how client data stays compliant. I presented it to the CTO, drove consensus, and secured sponsorship to lead the build. Separately, a prompt-engineering framework I designed was adopted as a practice-wide standard.</p>
+      <div class="meta">Vision → consensus → sponsored build</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label"><span>Background</span><span>03</span></div>
+
+    <div class="role">
+      <div class="when">2024 — now</div>
+      <div class="what">
+        <h4>Assistant Manager, Value Creation · <span class="org">Interpath Advisory</span></h4>
+        <p>PE-focused deal advisory: carve-outs, value creation, deal analytics, and AI-augmented delivery across industrial, retail, and pharmaceutical sectors.</p>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="when">2019 — 2024</div>
+      <div class="what">
+        <h4>Senior Associate · <span class="org">PwC, Asset &amp; Wealth Management</span></h4>
+        <p>Client-facing delivery across the US, Australia, Malaysia, India, and Poland for PE fund clients and technology-enabled portfolio companies. Japanese-language corporate research for cross-border investment.</p>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="when">2016 — 2018</div>
+      <div class="what">
+        <h4>Co-Founder &amp; Director · <span class="org">Cross-Border Consumer Goods</span></h4>
+        <p>Built a cross-border business from zero — sourcing, suppliers, logistics, customers — with full ownership of the outcome.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label"><span>Toolkit</span><span>04</span></div>
+    <div class="skills-grid">
+      <div class="skill-block">
+        <div class="k">AI &amp; Interpretability</div>
+        <div class="v">LLM evaluation &amp; reliability testing · prompt design with quality controls · hybrid human-AI workflow design · learning mechanistic interpretability (probing, forward hooks, TransformerLens) · RAG knowledge base</div>
+      </div>
+      <div class="skill-block">
+        <div class="k">Data &amp; Engineering</div>
+        <div class="v">Python (data parsing, deterministic financial calculation, API integration) · Alteryx (Designer Core Certified) · Power BI · advanced Excel · SQL (developing)</div>
+      </div>
+      <div class="skill-block">
+        <div class="k">Domain</div>
+        <div class="v">M&amp;A &amp; PE deal advisory · carve-outs &amp; value creation · financial modelling · senior stakeholder delivery</div>
+      </div>
+      <div class="skill-block">
+        <div class="k">Languages</div>
+        <div class="v">Mandarin (native) · English (fluent) · Japanese (fluent, JLPT N1, used in live client work)</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="sig">Currently going deep on interpretability — and looking for the right place to build.</div>
+    <div class="links">
+      <a href="mailto:jgao01234@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/jinggao24" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/jgao012345" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
