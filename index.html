@@ -98,6 +98,10 @@
     padding: 4px 10px; border-radius: 2px; white-space: nowrap;
   }
   .proj p { color: var(--ink-soft); font-size: 16px; margin-top: 12px; max-width: 64ch; }
+  .proj ul { margin: 12px 0 0 0; padding: 0; list-style: none; max-width: 64ch; }
+  .proj li { color: var(--ink-soft); font-size: 15.5px; padding: 5px 0 5px 20px; position: relative; }
+  .proj li::before { content: "\2192"; position: absolute; left: 0; color: var(--accent); }
+  .proj li b { color: var(--ink); font-weight: 600; }
   .proj .meta {
     font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
     color: var(--ink-faint); margin-top: 12px;
@@ -149,7 +153,7 @@
     <div class="sec-label"><span>About</span><span>01</span></div>
     <p>I sit between two worlds that don't usually meet: the structured, risk-careful world of M&amp;A and value-creation advisory, and the open, uncertain work of building with AI. I spent six years in the first, and over the past year I've gone deep into the second on my own initiative.</p>
     <p>My genuine interest is in <strong>how large models actually work and where they fail</strong>, not the demos but the reasoning underneath. I keep a personal research base of 400+ papers and care most about reliability and interpretability: the question of how a non-human intelligence can be trusted on real, high-stakes human problems.</p>
-    <p class="pull">Most curious about where models break, and why.</p>
+    <p class="pull">Most curious about where models break, and why. And whether an LLM's answer truly aligns with the question it was asked, and where the gaps come from.</p>
   </section>
 
   <section>
@@ -157,20 +161,23 @@
 
     <div class="proj">
       <div class="proj-top">
-        <h3>AI Reliability in Financial Benchmarking</h3>
-        <span class="proj-tag">Validation · prototype</span>
+        <h3>AI Reliability: What Breaks When an LLM Does Real Financial Work</h3>
+        <span class="proj-tag">Controlled study · findings</span>
       </div>
-      <p>Before building an AI benchmarking workflow, I tested its riskiest step: whether a model could reliably identify the right peer companies. I ran a controlled experiment against trusted ground-truth sets across several sectors, scored agreement across 16 runs, and diagnosed that the worst failure was a criteria-definition mismatch rather than a capability gap. Writing the criteria into the prompt lifted agreement on the hardest case from near-zero to ~68%. I turned the finding into a hybrid architecture (deterministic screen, model selects and explains within it, human sign-off, deterministic Python for the financials) and built the prototype for the deterministic core.</p>
-      <div class="meta">Designed, ran, and presented to CTO · sponsored to build · code coming to GitHub</div>
-    </div>
-
-    <div class="proj">
-      <div class="proj-top">
-        <h3>Audio Interpretability: Can a Model Hear a Wrong Note?</h3>
-        <span class="proj-tag">Planned · learning toward it</span>
-      </div>
-      <p>An interpretability project I'm designing, currently at the idea-and-learning stage. The plan: record two versions of a piano piece, one clean and one with a deliberate wrong note, and probe where inside an open audio model the two internal representations diverge, letting layer-by-layer evidence rather than a guess locate where the model registers the error. It started from a real moment of playing the piano for a model and sensing it didn't actually hear what I was doing. I'm now learning the mechanistic interpretability tooling (forward hooks, probing, TransformerLens) needed to build it properly.</p>
-      <div class="meta">Learning mechanistic interpretability (forward hooks, probing, TransformerLens) to build it</div>
+      <p>Before building an AI benchmarking workflow, I ran a controlled study of its riskiest step: whether a model could reliably identify the right peer companies for a financial benchmark. I tested it against sets the team already trusted as ground truth, across several sectors, scoring agreement across repeated runs with 'Reference saved memories' and 'Reference chat history' both switched off, so each run was independent and the results were clean and reproducible.</p>
+      <p>The core finding, about how the model chose peer companies, turned out to be a question about alignment rather than capability. On the hardest case the model scored near zero at first, but not because it was incapable: it was quietly answering a slightly different question than the one we were asking, selecting sensible peers under its own implicit definition of "comparable" rather than ours. Writing our actual screening criteria into the prompt lifted agreement on that case from near-zero to about 68%, and the size of the lift was inversely related to how well the model did unaided: the messier and more niche the sector, the more the criteria mattered. The remaining ceiling was definitional, not a capability limit.</p>
+      <p>Stress-testing the workflow, I independently ran into, diagnosed, and fixed six distinct failure modes that map onto core problems in AI evaluation and alignment:</p>
+      <ul>
+        <li><b>Specification gaming</b>: the model optimised a proxy count instead of the real objective, dropping genuinely core peers to hit a target number.</li>
+        <li><b>Benchmark contamination</b>: an evaluation metric flattered the model because the ground-truth answer sat inside the candidate pool it was scoring against.</li>
+        <li><b>Overfitting</b>: I caught myself reverse-engineering keywords from the known answers, which would have proved nothing, and stopped.</li>
+        <li><b>Measurement artefact</b>: the model's "wrong" picks were actually more correct; the scoring rule itself was wrong, not the model.</li>
+        <li><b>Objective-vs-proxy misspecification</b>: a similarity proxy that worked in one sector silently failed in another, so I had to rewrite it around what really made firms comparable.</li>
+        <li><b>Limits of formalisation</b>: some judgments of "who is truly comparable" could not be fully written into rules, which is exactly where a human checkpoint belongs.</li>
+      </ul>
+      <p>The through-line: every case was a gap between the true objective and an operable proxy, and a system faithfully optimising the proxy drifts from the objective. That gap is the heart of the alignment problem, and I met it from the concrete side, in real work, before I had the vocabulary for it.</p>
+      <p>I turned the findings into a hybrid architecture: a deterministic screen supplies the candidate pool, the model selects and explains within it, a person signs off, and the financial calculations run in plain Python with no model involved, so accuracy never depends on the model behaving. I built the prototype for the deterministic core, presented the findings to the firm's CTO, and secured sponsorship to lead the build.</p>
+      <div class="meta">Designed and ran the study · diagnosed six failure modes · presented to CTO and sponsored to build · write-up and code coming to GitHub</div>
     </div>
 
     <div class="proj">
@@ -178,7 +185,7 @@
         <h3>AI Workflow Architecture for an Advisory Firm</h3>
         <span class="proj-tag">Design · adopted</span>
       </div>
-      <p>On my own initiative, I built a mental model of how AI should work at the firm, not task-level tools but governed, workflow-level systems, including the distinction between agentic and AI-augmented workflows, where human checkpoints belong, and how client data stays compliant. I presented it to the CTO, drove consensus, and secured sponsorship to lead the build. Separately, a prompt-engineering framework I designed was adopted as a practice-wide standard.</p>
+      <p>On my own initiative, I built a mental model of how AI should work at the firm, not task-level tools but governed, workflow-level systems, including the distinction between agentic and AI-augmented workflows, where human checkpoints belong, and how client data stays compliant. I presented it to the CTO, drove consensus, and secured sponsorship to lead the build. Separately, a prompt-engineering framework I designed, with confidence tagging and source-citation rules built in as quality controls, was adopted as a practice-wide standard.</p>
       <div class="meta">Vision → consensus → sponsored build</div>
     </div>
   </section>
@@ -190,7 +197,7 @@
       <div class="when">2024 – now</div>
       <div class="what">
         <h4>Assistant Manager, Value Creation · <span class="org">Interpath Advisory</span></h4>
-        <p>PE-focused deal advisory: carve-outs, value creation, deal analytics, and AI-augmented delivery across industrial, retail, and pharmaceutical sectors.</p>
+        <p>Solve analytical and data problems on private-equity deals: structuring ambiguous problems, building analysis from messy operational data, and delivering AI-augmented work to decision-makers across industrial, retail, and pharmaceutical clients.</p>
       </div>
     </div>
 
@@ -198,7 +205,7 @@
       <div class="when">2019 – 2024</div>
       <div class="what">
         <h4>Senior Associate · <span class="org">PwC, Asset &amp; Wealth Management</span></h4>
-        <p>Client-facing delivery across the US, Australia, Malaysia, India, and Poland for PE fund clients and technology-enabled portfolio companies. Japanese-language corporate research for cross-border investment.</p>
+        <p>Ran client engagements across the US, Australia, Malaysia, India, and Poland, holding analysis and stakeholders together across time zones. Included Japanese-language corporate research (translating financial filings and running client correspondence in Japanese).</p>
       </div>
     </div>
 
@@ -258,11 +265,11 @@
     <div class="skills-grid">
       <div class="skill-block">
         <div class="k">Piano</div>
-        <div class="v">Central Conservatory of Music, Grade 9. The starting point for my audio interpretability project: the question of whether a model can hear what a trained ear hears came from years at the keyboard.</div>
+        <div class="v">Central Conservatory of Music, Grade 9. Drawn most to Rachmaninoff, Sibelius, Shostakovich, and Chopin.</div>
       </div>
       <div class="skill-block">
         <div class="k">Reading</div>
-        <div class="v">Currently reading at the intersection of mind and machine: Anil Seth's <em>Being You</em>, Giulio Tononi's <em>Phi</em>, Max Tegmark's <em>Our Mathematical Universe</em>, Judea Pearl's <em>The Book of Why</em>, and Simon Prince's <em>Understand Deep Learning</em>. Most drawn to where consciousness, intelligence, and machine understanding meet: whether a system that doesn't think like us can still genuinely understand.</div>
+        <div class="v">Currently reading at the intersection of mind and machine: Anil Seth's <em>Being You</em>, Giulio Tononi's <em>Phi</em>, Max Tegmark's <em>Our Mathematical Universe</em>, Judea Pearl's <em>The Book of Why</em>, Donald Hoffman's <em>The Case Against Reality</em>, and Simon Prince's <em>Understand Deep Learning</em>. Most drawn to where consciousness, intelligence, and machine understanding meet: whether a system that doesn't think like us can still genuinely understand.</div>
       </div>
       <div class="skill-block">
         <div class="k">Travel</div>
@@ -272,7 +279,7 @@
   </section>
 
   <footer>
-    <div class="sig">Currently going deep on interpretability, and looking for the right place to build.</div>
+    <div class="sig">Working on where AI is reliable and where it isn't, and learning to look inside the models to find out why.</div>
     <div class="links">
       <a href="mailto:jgao01234@gmail.com">Email</a>
       <a href="https://linkedin.com/in/jinggao24" target="_blank" rel="noopener">LinkedIn</a>
