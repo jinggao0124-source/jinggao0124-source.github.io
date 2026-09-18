@@ -182,6 +182,17 @@
 
     <div class="proj">
       <div class="proj-top">
+        <h3>Shipping an AI Skill That Runs a Workflow End to End</h3>
+        <span class="proj-tag">Built · shipped · in use</span>
+      </div>
+      <p>The peer-selection study told me where the model could and couldn't be trusted. The next step was making that usable by people other than me, so I built it as an agent skill and shipped it to the team, with an equivalent Custom GPT for colleagues working in a different tool.</p>
+      <p>The design follows the finding: deterministic scripts handle everything that has to be exactly right, reading the input and rendering the formatted output, while the model does only the judgement it is actually good at, inside an encoded methodology, and a person verifies before anything is used. The methodology is written into the skill rather than left implicit: comparability in strict priority order, two tiers only, no padding toward a target count, and integrity rules that forbid inventing names or fabricating figures. Every output carries a caveat that it is a nomination to be verified, not a finished peer set.</p>
+      <p>It now carries the whole workflow rather than one step: intake and validation, nomination, formatted workbook, handover of the data templates, and finally a populated client deck, with the deterministic steps scripted so the same input always produces the same output. I also built a companion reference workbook that traces every figure in the deck back to its source cell and reconciles those mappings against the supplied file, flagging anything that has shifted, so the next person can maintain it without reverse-engineering my work.</p>
+      <div class="meta">Tested across 24 targets · adopted by the team · methodology and guardrails encoded, not implicit</div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
         <h3>Governed AI on a High-Stakes Government Bid</h3>
         <span class="proj-tag">Applied · governance</span>
       </div>
@@ -198,6 +209,27 @@
       <p>On my own initiative, I built a mental model of how AI should work at the firm, not task-level tools but governed, workflow-level systems, including the distinction between agentic and AI-augmented workflows, where human checkpoints belong, and how client data stays compliant. I presented it to the CTO, drove consensus, and secured sponsorship to lead the build. Separately, a prompt-engineering framework I designed, with confidence tagging and source-citation rules built in as quality controls, was adopted as a practice-wide standard.</p>
       <div class="meta">Vision → consensus → sponsored build</div>
     </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <h3>Making the Build-vs-Buy Case for a Firm's AI Capability</h3>
+        <span class="proj-tag">Strategy · independent</span>
+      </div>
+      <p>When a new AI MD joined, she handed me the question of whether the firm should build its own AI delivery capability or buy it as a service, along with a partner's proposal and methodology as the raw material. I built the leadership case from there: where the market is against the adoption gap, what comparable firms are doing, which client demand is strongest, the three use cases worth starting from, a staged plan with decision gates, and the investment and ROI framing.</p>
+      <p>The argument I landed on was build-to-own rather than buy, with a partner used to accelerate rather than to own the core, so the capability, the IP and the code stay with the firm. I grounded it in a real case of a company that had built on a vendor later acquired and shut down, because the dependency risk is not hypothetical. Every claim is tagged by evidence type and dated, and the assumptions are marked as assumptions, which matters more than persuasion when leadership is being asked to commit money.</p>
+      <div class="meta">Partner proposal in · full leadership case out · conditional build-to-own recommendation</div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <h3>A Firm-Wide Agent on a Partner's Enterprise AI Platform</h3>
+        <span class="proj-tag">Owned · in progress</span>
+      </div>
+      <p>I own a firm-wide timesheet agent built on the third-party intelligence platform the firm runs on, working directly with the partner's AI engineers on design, integration, and the problems that only appear at this scale.</p>
+      <p>It is a different kind of work from building my own tools. The platform runs an automated evaluation over every skill before it can be saved, so part of the job is working with a guardrail I did not design and cannot see inside, and working with the partner's engineers to tell a genuine defect apart from a threshold set too tight. That gap, between a system doing exactly what it was configured to do and a person who cannot tell why it refused, is the same reliability question I care about, met from the other side.</p>
+      <div class="meta">Owned end to end · built alongside the partner's engineering team · in progress</div>
+    </div>
+
   </section>
 
   <section>
@@ -253,11 +285,11 @@
     <div class="skills-grid">
       <div class="skill-block">
         <div class="k">AI &amp; Interpretability</div>
-        <div class="v">LLM evaluation &amp; reliability testing · prompt design with quality controls · hybrid human-AI workflow design · learning mechanistic interpretability (probing, forward hooks, TransformerLens) · RAG knowledge base</div>
+        <div class="v">LLM evaluation &amp; reliability testing · agent skills &amp; Custom GPTs (authored and shipped) · prompt design with quality controls · hybrid human-AI workflow design · Claude Code · workflow automation (n8n) · learning mechanistic interpretability (probing, forward hooks, TransformerLens) · RAG knowledge base</div>
       </div>
       <div class="skill-block">
         <div class="k">Data &amp; Engineering</div>
-        <div class="v">Python (data parsing, deterministic financial calculation, API integration) · Alteryx (Designer Core Certified) · Power BI · advanced Excel · SQL (developing)</div>
+        <div class="v">Python (data parsing, deterministic financial calculation, API integration) · deepening CS foundations through Harvard CS50 (in progress) · Alteryx (Designer Core Certified) · Power BI · advanced Excel · SQL (developing)</div>
       </div>
       <div class="skill-block">
         <div class="k">Domain</div>
