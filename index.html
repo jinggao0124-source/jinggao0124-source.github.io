@@ -141,7 +141,7 @@
   <header>
     <div class="eyebrow">London · EN / 中文 / 日本語 N1</div>
     <h1>Jing Gao</h1>
-    <p class="lede">Six years in deal and financial-services advisory, now working hands-on at the edge of AI: how models reason, where they break, and whether a mind that doesn't think like ours can still reliably solve our problems.</p>
+    <p class="lede">Six years in financial services and deal advisory, now building and deploying AI at work: how models reason, where they break, and whether a mind that doesn't think like ours can still reliably solve our problems.</p>
     <div class="contact-row">
       <a href="mailto:jgao01234@gmail.com">jgao01234@gmail.com</a>
       <a href="https://linkedin.com/in/jinggao24" target="_blank" rel="noopener">LinkedIn</a>
@@ -151,8 +151,8 @@
 
   <section class="about">
     <div class="sec-label"><span>About</span><span>01</span></div>
-    <p>I sit between two worlds that don't usually meet: the structured, risk-careful world of M&amp;A and value-creation advisory, and the open, uncertain work of building with AI. I spent six years in the first, and over the past year I've gone deep into the second on my own initiative.</p>
-    <p>My genuine interest is in <strong>how large models actually work and where they fail</strong>, not the demos but the reasoning underneath. I keep a personal research base of 400+ papers and care most about reliability and interpretability: the question of how a non-human intelligence can be trusted on real, high-stakes human problems.</p>
+    <p>I sit between two worlds that don't usually meet: the structured, risk-careful world of M&amp;A and value-creation advisory, and the open, uncertain work of building with AI. I spent six years in the first, and over the past two years I've gone deep into the second on my own initiative.</p>
+    <p>What I build gets used. An agent skill now in its fourth version runs end to end for my team, a firm-wide agent is in progress, and the evaluation work underneath them decides where a model is allowed to be trusted. My genuine interest is in <strong>how large models actually work and where they fail</strong>, not the demos but the reasoning underneath. I keep a personal research base of papers I long ago stopped counting, and care most about reliability and interpretability: the question of how a non-human intelligence can be trusted on real, high-stakes human problems.</p>
     <p class="pull">Most curious about where models break, and why. And whether an LLM's answer truly aligns with the question it was asked, and where the gaps come from.</p>
   </section>
 
@@ -176,19 +176,29 @@
         <li><b>Limits of formalisation</b>: some judgments of "who is truly comparable" could not be fully written into rules, which is exactly where a human checkpoint belongs.</li>
       </ul>
       <p>The through-line: every case was a gap between the true objective and an operable proxy, and a system faithfully optimising the proxy drifts from the objective. That gap is the heart of the alignment problem, and I met it from the concrete side, in real work, before I had the vocabulary for it.</p>
-      <p>I turned the findings into a hybrid architecture: a deterministic screen supplies the candidate pool, the model selects and explains within it, a person signs off, and the financial calculations run in plain Python with no model involved, so accuracy never depends on the model behaving. I built the prototype for the deterministic core, presented the findings to the firm's CTO, and secured sponsorship to lead the build.</p>
+      <p>I turned the findings into a hybrid architecture: a deterministic screen supplies the candidate pool, the model selects and explains within it, a person signs off, and the financial calculations run in plain Python with no model involved, so accuracy never depends on the model behaving. I modelled the financial logic in Excel first and then coded it, built the prototype for the deterministic core, presented the findings to the firm's CTO, and secured sponsorship to lead the build.</p>
       <div class="meta">Designed and ran the study · diagnosed six failure modes · presented to CTO and sponsored to build · write-up and code coming to GitHub</div>
     </div>
 
     <div class="proj">
       <div class="proj-top">
         <h3>Shipping an AI Skill That Runs a Workflow End to End</h3>
-        <span class="proj-tag">Built · shipped · in use</span>
+        <span class="proj-tag">Built · shipped · fourth version</span>
       </div>
-      <p>The peer-selection study told me where the model could and couldn't be trusted. The next step was making that usable by people other than me, so I built it as an agent skill and shipped it to the team, with an equivalent Custom GPT for colleagues working in a different tool.</p>
+      <p>The peer-selection study told me where the model could and couldn't be trusted. The next step was making that usable by people other than me, so I built it as an agent skill and shipped it to the team, with an equivalent Custom GPT for colleagues working in a different tool. It is now in its fourth version, each one driven by how people actually used it rather than how I expected them to.</p>
       <p>The design follows the finding: deterministic scripts handle everything that has to be exactly right, reading the input and rendering the formatted output, while the model does only the judgement it is actually good at, inside an encoded methodology, and a person verifies before anything is used. The methodology is written into the skill rather than left implicit: comparability in strict priority order, two tiers only, no padding toward a target count, and integrity rules that forbid inventing names or fabricating figures. Every output carries a caveat that it is a nomination to be verified, not a finished peer set.</p>
       <p>It now carries the whole workflow rather than one step: intake and validation, nomination, formatted workbook, handover of the data templates, and finally a populated client deck, with the deterministic steps scripted so the same input always produces the same output. I also built a companion reference workbook that traces every figure in the deck back to its source cell and reconciles those mappings against the supplied file, flagging anything that has shifted, so the next person can maintain it without reverse-engineering my work.</p>
-      <div class="meta">Tested across 24 targets · adopted by the team · methodology and guardrails encoded, not implicit</div>
+      <div class="meta">Tested across 24 targets · adopted by the team · four versions · methodology and guardrails encoded, not implicit</div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <h3>A Firm-Wide Agent on a Partner's Enterprise AI Platform</h3>
+        <span class="proj-tag">Owned · in progress</span>
+      </div>
+      <p>I own a firm-wide timesheet agent built on the third-party intelligence platform the firm runs on, working directly with the partner's AI engineers on design, integration, and the problems that only appear at this scale.</p>
+      <p>It is a different kind of work from building my own tools. The platform runs an automated evaluation over every skill before it can be saved, so part of the job is working with a guardrail I did not design and cannot see inside, and working with the partner's engineers to tell a genuine defect apart from a threshold set too tight. That gap, between a system doing exactly what it was configured to do and a person who cannot tell why it refused, is the same reliability question I care about, met from the other side.</p>
+      <div class="meta">Owned end to end · built alongside the partner's engineering team · in progress</div>
     </div>
 
     <div class="proj">
@@ -198,7 +208,19 @@
       </div>
       <p>On a mid eight figure UK government infrastructure bid, on a two-week timeline, a senior MD asked me to raise the quality of our technical response using AI. From several dozen tender documents I stood up a document-grounded research base, built an operating-model comparison matrix across countries, and ran competitor and pressure-point analysis mapped to each question.</p>
       <p>What mattered was how I did it: with guardrails. I ran a governed, source-controlled workflow with a full audit trail and source-coverage checks, so every claim was traceable to a document and unsupported content was caught before it reached a reviewer. I used chain-of-thought prompting to force the model to justify each judgement, for example why a competitor would position itself a certain way, so its reasoning stayed visible and checkable rather than a black-box conclusion. The senior team built their revisions around that output and delivered review-ready responses inside the deadline.</p>
-      <div class="meta">First bid of this scale · governed, source-traceable AI · MD-review-ready in two weeks</div>
+      <p>Afterwards I turned the method into a reusable tender playbook, so the next bid team starts from a tested process rather than from my memory of what worked.</p>
+      <div class="meta">First bid of this scale · governed, source-traceable AI · MD-review-ready in two weeks · method captured as a reusable playbook</div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <h3>Pipelines: When the Right Answer Isn't a Model</h3>
+        <span class="proj-tag">Built · shipped</span>
+      </div>
+      <p>Not every problem needs an LLM, and knowing which ones don't is part of the work. Two recent builds are deterministic end to end.</p>
+      <p>The first replaced a manual research task outright: an automation pipeline built on n8n and the Apify API, with routing and fallback handling, that sourced several hundred pharmaceutical executive contacts for the business development team. No model anywhere in it. Scoped, built and shipped in half a day.</p>
+      <p>The second I built because the dataset did not exist and I wanted it: a Python pipeline against two public UK APIs, filtering roughly 290,000 statutory notices down to a 7,200-company insolvency dataset, cross-referenced for industry codes and official dates. Parsing, matching and reconciliation, all deterministic, all reproducible.</p>
+      <div class="meta">n8n · Apify · Python · public APIs · no model involved, by design</div>
     </div>
 
     <div class="proj">
@@ -206,7 +228,7 @@
         <h3>AI Workflow Architecture for an Advisory Firm</h3>
         <span class="proj-tag">Design · adopted</span>
       </div>
-      <p>On my own initiative, I built a mental model of how AI should work at the firm, not task-level tools but governed, workflow-level systems, including the distinction between agentic and AI-augmented workflows, where human checkpoints belong, and how client data stays compliant. I presented it to the CTO, drove consensus, and secured sponsorship to lead the build. Separately, a prompt-engineering framework I designed, with confidence tagging and source-citation rules built in as quality controls, was adopted as a practice-wide standard.</p>
+      <p>On my own initiative, I built a mental model of how AI should work at the firm, not task-level tools but governed, workflow-level systems, including the distinction between agentic and AI-augmented workflows, where human checkpoints belong, and how client data stays compliant. I presented it to the CTO, drove consensus, and secured sponsorship to lead the build. Separately, I designed a prompt-engineering framework with confidence tagging and source-citation rules built in as quality controls, which became the standard I now hold every piece of AI work I produce to.</p>
       <div class="meta">Vision → consensus → sponsored build</div>
     </div>
 
@@ -218,16 +240,6 @@
       <p>When a new AI MD joined, she handed me the question of whether the firm should build its own AI delivery capability or buy it as a service, along with a partner's proposal and methodology as the raw material. I built the leadership case from there: where the market is against the adoption gap, what comparable firms are doing, which client demand is strongest, the three use cases worth starting from, a staged plan with decision gates, and the investment and ROI framing.</p>
       <p>The argument I landed on was build-to-own rather than buy, with a partner used to accelerate rather than to own the core, so the capability, the IP and the code stay with the firm. I grounded it in a real case of a company that had built on a vendor later acquired and shut down, because the dependency risk is not hypothetical. Every claim is tagged by evidence type and dated, and the assumptions are marked as assumptions, which matters more than persuasion when leadership is being asked to commit money.</p>
       <div class="meta">Partner proposal in · full leadership case out · conditional build-to-own recommendation</div>
-    </div>
-
-    <div class="proj">
-      <div class="proj-top">
-        <h3>A Firm-Wide Agent on a Partner's Enterprise AI Platform</h3>
-        <span class="proj-tag">Owned · in progress</span>
-      </div>
-      <p>I own a firm-wide timesheet agent built on the third-party intelligence platform the firm runs on, working directly with the partner's AI engineers on design, integration, and the problems that only appear at this scale.</p>
-      <p>It is a different kind of work from building my own tools. The platform runs an automated evaluation over every skill before it can be saved, so part of the job is working with a guardrail I did not design and cannot see inside, and working with the partner's engineers to tell a genuine defect apart from a threshold set too tight. That gap, between a system doing exactly what it was configured to do and a person who cannot tell why it refused, is the same reliability question I care about, met from the other side.</p>
-      <div class="meta">Owned end to end · built alongside the partner's engineering team · in progress</div>
     </div>
 
   </section>
@@ -246,7 +258,7 @@
     <div class="role">
       <div class="when">2019 – 2024</div>
       <div class="what">
-        <h4>Senior Associate · <span class="org">PwC, Asset &amp; Wealth Management</span></h4>
+        <h4>Senior Assurance Associate · <span class="org">PwC, Asset &amp; Wealth Management</span></h4>
         <p>Ran client engagements across the US, Australia, Malaysia, India, and Poland, holding analysis and stakeholders together across time zones. Included Japanese-language corporate research (translating financial filings and running client correspondence in Japanese).</p>
       </div>
     </div>
@@ -285,15 +297,15 @@
     <div class="skills-grid">
       <div class="skill-block">
         <div class="k">AI &amp; Interpretability</div>
-        <div class="v">LLM evaluation &amp; reliability testing · agent skills &amp; Custom GPTs (authored and shipped) · prompt design with quality controls · hybrid human-AI workflow design · Claude Code · workflow automation (n8n) · learning mechanistic interpretability (probing, forward hooks, TransformerLens) · RAG knowledge base</div>
+        <div class="v">LLM evaluation &amp; reliability testing · agent skills &amp; Custom GPTs (authored, versioned and shipped) · evaluation design, thresholds and failure-mode diagnosis · prompt design with quality controls · hybrid human-AI workflow design · Claude Code · comparative model evaluation (Claude, ChatGPT, Copilot) · workflow automation (n8n, Apify) · RAG knowledge base · learning mechanistic interpretability (probing, forward hooks, TransformerLens)</div>
       </div>
       <div class="skill-block">
         <div class="k">Data &amp; Engineering</div>
-        <div class="v">Python (data parsing, deterministic financial calculation, API integration) · deepening CS foundations through Harvard CS50 (in progress) · Alteryx (Designer Core Certified) · Power BI · advanced Excel · SQL (developing)</div>
+        <div class="v">Python (data parsing, deterministic financial calculation, public API integration) · REST APIs · deepening CS foundations through Harvard CS50 (in progress) · Alteryx (Designer Core Certified) · Power BI · advanced Excel · SQL (developing)</div>
       </div>
       <div class="skill-block">
         <div class="k">Domain</div>
-        <div class="v">M&amp;A &amp; PE deal advisory · carve-outs &amp; value creation · financial modelling · senior stakeholder delivery</div>
+        <div class="v">M&amp;A &amp; PE deal advisory · carve-outs &amp; value creation · working capital &amp; peer benchmarking · financial modelling · senior stakeholder delivery</div>
       </div>
       <div class="skill-block">
         <div class="k">Languages</div>
