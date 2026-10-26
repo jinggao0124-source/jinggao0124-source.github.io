@@ -152,7 +152,7 @@
   <section class="about">
     <div class="sec-label"><span>About</span><span>01</span></div>
     <p>I sit between two worlds that don't usually meet: the structured, risk-careful world of M&amp;A and value-creation advisory, and the open, uncertain work of building with AI. I spent six years in the first, and over the past two years I've gone deep into the second on my own initiative.</p>
-    <p>What I build gets used. An agent skill now in its fourth version runs end to end for my team, a firm-wide agent is in progress, and the evaluation work underneath them decides where a model is allowed to be trusted. My genuine interest is in <strong>how large models actually work and where they fail</strong>, not the demos but the reasoning underneath. I keep a personal research base of papers I long ago stopped counting, and care most about reliability and interpretability: the question of how a non-human intelligence can be trusted on real, high-stakes human problems.</p>
+    <p>What I build gets used. An agent skill I have taken through many versions now runs end to end for my team, a firm-wide agent is in testing, and the evaluation work underneath them decides where a model is allowed to be trusted. My genuine interest is in <strong>how large models actually work and where they fail</strong>, not the demos but the reasoning underneath. I keep a personal research base of papers I long ago stopped counting, and care most about reliability and interpretability: the question of how a non-human intelligence can be trusted on real, high-stakes human problems.</p>
     <p class="pull">Most curious about where models break, and why. And whether an LLM's answer truly aligns with the question it was asked, and where the gaps come from.</p>
   </section>
 
@@ -183,22 +183,33 @@
     <div class="proj">
       <div class="proj-top">
         <h3>Shipping an AI Skill That Runs a Workflow End to End</h3>
-        <span class="proj-tag">Built · shipped · fourth version</span>
+        <span class="proj-tag">Built · shipped · in use</span>
       </div>
-      <p>The peer-selection study told me where the model could and couldn't be trusted. The next step was making that usable by people other than me, so I built it as an agent skill and shipped it to the team, with an equivalent Custom GPT for colleagues working in a different tool. It is now in its fourth version, each one driven by how people actually used it rather than how I expected them to.</p>
+      <p>The peer-selection study told me where the model could and couldn't be trusted. The next step was making that usable by people other than me, so I built it as an agent skill and shipped it to the team, with an equivalent Custom GPT for colleagues working in a different tool. It has been through many versions since, each driven by how people actually used it rather than how I expected them to, and it has now been handed over to the team.</p>
       <p>The design follows the finding: deterministic scripts handle everything that has to be exactly right, reading the input and rendering the formatted output, while the model does only the judgement it is actually good at, inside an encoded methodology, and a person verifies before anything is used. The methodology is written into the skill rather than left implicit: comparability in strict priority order, two tiers only, no padding toward a target count, and integrity rules that forbid inventing names or fabricating figures. Every output carries a caveat that it is a nomination to be verified, not a finished peer set.</p>
       <p>It now carries the whole workflow rather than one step: intake and validation, nomination, formatted workbook, handover of the data templates, and finally a populated client deck, with the deterministic steps scripted so the same input always produces the same output. I also built a companion reference workbook that traces every figure in the deck back to its source cell and reconciles those mappings against the supplied file, flagging anything that has shifted, so the next person can maintain it without reverse-engineering my work.</p>
-      <div class="meta">Tested across 24 targets · adopted by the team · four versions · methodology and guardrails encoded, not implicit</div>
+      <div class="meta">Tested across 24 targets · adopted and handed over · many versions · methodology and guardrails encoded, not implicit</div>
     </div>
 
     <div class="proj">
       <div class="proj-top">
-        <h3>A Firm-Wide Agent on a Partner's Enterprise AI Platform</h3>
-        <span class="proj-tag">Owned · in progress</span>
+        <h3>A Firm-Wide Agent That Records Time Into Our ERP</h3>
+        <span class="proj-tag">Owned · in testing</span>
       </div>
-      <p>I own a firm-wide timesheet agent built on the third-party intelligence platform the firm runs on, working directly with the partner's AI engineers on design, integration, and the problems that only appear at this scale.</p>
+      <p>I own a firm-wide timesheet agent built on the third-party intelligence platform the firm runs on, working directly with the partner's AI engineers on its design and integration. It is built for every team except insolvency and restructuring, and is now in testing and review. Every run works only on the timecard of whoever is signed in, and the shared skill holds no one person's projects or hours: everything is read live for the current user.</p>
+      <p>It runs five paths: a calendar suggestion, project time, absence, removing time, and a final draft-and-write step. Projects are resolved in dependency order, shortcut first, then project, activity and report code. Exactly one valid option is filled in and shown in the draft; several mean a single question, asked in the system's own labels; none means it stops and explains rather than guessing.</p>
+      <p>Most of the design is about what it must not do, because it writes into a system of record:</p>
+      <ul>
+        <li><b>Never invents a code.</b> No project, activity, report code or wage code that does not already exist, and expense codes are never offered.</li>
+        <li><b>Nothing is written until the user confirms one consolidated draft,</b> and confirming means only "record these hours".</li>
+        <li><b>One line is posted and checked before the rest,</b> and each grid row is found again by its code immediately before writing, because rows shift when a shortcut is added.</li>
+        <li><b>Nothing is reported as done until the system has been read back.</b> For absence, success is checked against the day's remaining hours, not against the system's reply.</li>
+        <li><b>The calendar only suggests.</b> It reads only the user's own calendar, never decides a project on its own, and never copies private meeting details across. This step is in the skill but not yet tested on a live calendar.</li>
+        <li><b>It records hours and stops there.</b> It never confirms, submits or authorises a timesheet: the employee confirms the week, and authorisation stays with the supervisor.</li>
+      </ul>
+      <p>The insolvency and restructuring teams are the hard case. On busy days they charge more than twenty lines, and every line needs its own written judgement. When I looked into where their time actually went, it was not entering the hours, it was writing those comments. So the version for them is designed around that: rather than collecting a project list from everyone, it reads each person's own charging history from the platform, since these engagements run for a long time, and adds new projects only as they arrive. Their past comments become a dropdown in an Excel template that works for both the person and the agent, so they pick the closest one and edit it instead of writing from scratch. The template is built and the skill is next. The team found the approach useful, and the partner's AI engineers endorsed it.</p>
       <p>It is a different kind of work from building my own tools. The platform runs an automated evaluation over every skill before it can be saved, so part of the job is working with a guardrail I did not design and cannot see inside, and working with the partner's engineers to tell a genuine defect apart from a threshold set too tight. That gap, between a system doing exactly what it was configured to do and a person who cannot tell why it refused, is the same reliability question I care about, met from the other side.</p>
-      <div class="meta">Owned end to end · built alongside the partner's engineering team · in progress</div>
+      <div class="meta">Owned end to end · built alongside the partner's engineering team · in testing for most teams · high-volume version designed</div>
     </div>
 
     <div class="proj">
